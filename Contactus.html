@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Ethereal Florist</title>
+    <!-- AOS CSS for Animations -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-chatbox.css">
+    <style>
+        /* General Styles */
+        body {
+        margin: 0;
+        padding: 0;
+        font-style: normal;
+        margin: 0;
+        color: #333;
+        line-height: 1.6;
+        height: 100%;
+        background-blend-mode: overlay; /* Overlay untuk mencampur gradient dengan pattern */
+        background-size: cover;
+        background-attachment: fixed; /* Membuat background tidak bergerak saat scroll */
+        }
+        /* Header */
+
+        .about-header {
+            background: url('images/about-banner.jpg') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .about-header h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
+
+        .contact-header {
+            text-align: center;
+            padding: 10px 10px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #e4763e;
+        }
+
+        .contact-header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+
+        }
+
+        .contact-header p {
+            font-size: 1.2rem;
+        }
+
+        /* Contact Container */
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: stretch;
+            padding: 50px 20px;
+            gap: 30px;
+        }
+
+        /* Box Style */
+        .contact-box {
+          background: linear-gradient(135deg, #ffffff, #e65d22);
+            flex: 1 1 300px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-box:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Image Style */
+        .contact-box img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Contact Info */
+        .contact-info h2,
+        .contact-form h2 {
+            text-align: center;
+            color: #292422;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .contact-info p {
+            font-size: 1rem;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-info p i {
+            margin-right: 10px;
+            color: #ee743f;
+            font-size: 1.2rem;
+        }
+
+        /* Contact Form */
+        .contact-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 4px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .contact-form button {
+            background: #504e4d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .contact-form button:hover {
+            background: #333;
+        }
+
+        /* Map Section */
+        .map-section iframe {
+            width: 100%;
+            height: 300px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer */
+        footer {
+  color: #0c0c0c;
+  padding: 20px 0;
+  overflow: hidden;
+  position: relative;
+  margin-top: auto;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.animated-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: #d4d4d4; /* Background gelap untuk animasi */
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-column {
+  flex: 1;
+  margin: 0 15px;
+}
+
+.footer-column h3 {
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.footer-column p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.footer-column a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer-column a:hover {
+  text-decoration: underline;
+}
+.footer-column p a {
+  color: #000; /* Warna teks link */
+  text-decoration: none; /* Hilangkan garis bawah */
+  font-size: 14px;
+  line-height: 1.5;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px; /* Jarak antara ikon dan teks */
+}
+
+.footer-column p a:hover {
+  color: #ee743f; /* Warna saat hover */
+  text-decoration: underline;
+}
+
+.social-icons-footer {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+  position: absolute;
+  left: 39.7%;
+  bottom: 16%;
+}
+
+.social-icons-footer a {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-color: #fa8231;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  background-color: #ee743f;
+}
+.social-icons-footer img{
+width: 15px;
+height: 15px;
+}
+
+.social-icons-contact {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+  position: absolute;
+  left: 4.2%;
+  bottom: 30%;
+}
+
+.social-icons-contact a {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-color: #fa8231;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  background-color: #322e2c;
+}
+.social-icons-contact img{
+width: 15px;
+height: 15px;
+}
+
+.opening-hours {
+  font-family: Arial, sans-serif;
+  color: #ff0404;
+  background-color: #fdfaf5; /* Warna latar belakang */
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px; /* Lebar maksimal */
+  margin: auto;
+}
+
+.hour-item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #c96d11;
+  padding: 8px 0;
+  font-size: 14px;
+  color: #000000;
+}
+
+.hour-item:last-child {
+  border-bottom: none; /* Hapus garis bawah terakhir */
+}
+
+.hour-item.closed {
+  color: #e74c3c; /* Warna merah untuk Closed */
+  font-weight: bold;
+}
+
+
+.footer-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  font-size: 14px;
+}
+
+.footer-bottom .border {
+  width: 1200px; /* Sesuaikan panjang border */
+  height: 1px;
+  background-color: #444;
+  margin-bottom: 10px; /* Atur jarak garis dengan teks */
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d3d3d3;
+  border-radius: 50px;
+  padding: 2px 2px;
+  background-color: #f3f3f3;
+  width:270px;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  color:  #ee743f;
+  flex-grow: 1;
+  padding: 1px 1px;
+}
+
+.search-box button {
+  border: none;
+  outline: none;
+  background: linear-gradient(45deg, #ee743f,  #5348c5); /* Gradien warna */
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 5px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow default */
+}
+
+.search-box button:hover {
+  background: linear-gradient(45deg, #5348c5, #ee743f); /* Gradien warna */
+  transform: translateY(-3px); /* Efek angkat */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Shadow lebih besar */
+  color: #ffffff; /* Warna teks tetap putih */
+}
+.search-box ::placeholder{
+  font-size: 12px;
+  padding-left: 10px;
+}
+
+.logo-footer {
+  display: flex;
+  text-align: center;
+  padding: 0px 0;
+  display: flex;
+  margin-left: -200px;
+  margin-right: 50px;
+  position: absolute;
+  left: 13%;
+  bottom: 28%;
+}
+
+.logo-footer img {
+  height: 160px;
+}
+.contact-header {
+            text-align: center;
+            padding: 00px 0px;
+            background: none
+        }
+        .contact-info a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.contact-info a:hover {
+    color: #ee743f; /* Warna teks saat di-hover */
+    transform: scale(1.05); /* Efek zoom ringan */
+}
+
+.contact-info p {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Jarak antara ikon dan teks */
+    margin: 10px 0;
+}
+.contact-info i {
+    color: #ee743f; /* Warna ikon default */
+    transition: color 0.3s ease;
+}
+.contact-info a:hover i {
+    color: #ff4500; /* Warna ikon saat di-hover */
+}
+.contact-info {
+  background: linear-gradient(135deg, #e7b695, #ff4d00);
+}
+
+.contact-form {
+  background: linear-gradient(135deg, #e7b695, #ff4d00);
+}
+
+.map-section {
+  background: linear-gradient(135deg, #e7b695, #ff4d00);
+}
+    </style>
+    <!-- Font Awesome for Icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="logo-container">
+        <img src="images/1000145552_processed.jpg.png" alt="Ethereal Florist Logo">
+      </div>
+    
+      <!-- Header Section -->
+      <header>
+        <!-- Navigation -->
+        <nav class="navbar">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="ourproducts.html">Our Product</a></li>
+            <li><a href="aboutus.html">About Us</a></li>
+            <li><a href="Contactus.html">Contact Us</a></li>
+            <li><a href="review.html">Review</a></li>
+          </ul>
+        </nav>
+    
+        <!-- Icons -->
+        <div class="header-icons">
+        <a href="login_form.php" target="_blank" class="admin-link">
+            <img src="images/user icon.jpg" alt="User Icon" class="admin-icon">
+            <span class="admin-text">Login</span>
+        </a>
+    </div>
+      </header>
+    <div class="contact-header">
+        <h1>Hubungi Kami</h1>
+    </div>
+    <!-- Contact Section -->
+    <section class="contact-container">
+        <!-- Contact Info -->
+        <div class="contact-box contact-info" data-aos="fade-right">
+          <h2>Informasi Kontak</h2>
+          <p>
+              <i class="fas fa-map-marker-alt"></i>
+              <a href="https://maps.google.com/?q=Jl.+Mawar+No.+123,+Jakarta,+Indonesia" target="_blank" style="text-decoration: none; color: inherit;">
+                <span>&#x1f3e0;</span>Universitas Bina Sarana Informatika
+              </a>
+          </p>
+          <p>
+              <i class="fas fa-envelope"></i>
+              <a href="mailto:info@etherealflorist.com" style="text-decoration: none; color: inherit;">
+                <span>&#x2709;</span>Alfathanugrah2002@gmail.com
+              </a>
+          </p>
+          <p>
+              <i class="fas fa-phone"></i>
+              <a href="tel:+6281234567890" style="text-decoration: none; color: inherit;">
+                <span>&#x260e;</span>083245627278
+              </a>
+          </p>
+      </div> 
+      <div class="social-icons-contact">
+        <a href="https://instagram.com" target="_blank" class="social-icon instagram">
+          <img src="images/iconinstagram.svg" alt="Instagram">
+        </a>
+        <a href="https://facebook.com" target="_blank" class="social-icon facebook">
+          <img src="images/iconfacebook.svg" alt="Facebook">
+        </a>
+        <a href="https://wa.me/1234567890" target="_blank" class="social-icon whatsapp">
+          <img src="images/iconwhatsapp.svg" alt="WhatsApp">
+        </a>
+      </div>
+        <!-- Contact Form -->
+        <div class="contact-box contact-form" data-aos="fade-up">
+            <h2>Formulir Kontak</h2>
+            <form id="contact-form">
+                <label for="name">Nama Anda</label>
+                <input type="text" id="name" placeholder="Masukkan nama Anda" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Masukkan email Anda" required>
+
+                <label for="message">Pesan</label>
+                <textarea id="message" rows="5" placeholder="Tulis pesan Anda" required></textarea>
+
+                <button type="submit">Kirim Pesan</button>
+            </form>
+        </div>
+
+        <!-- Google Maps -->
+        <div class="contact-box map-section" data-aos="fade-left">
+          <h2 style="color: #292422;">Lokasi Peta</h2>
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15863.398751629986!2d107.0735499!3d-6.2834817!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698fdc5ecb6ab7%3A0xd0ee2a76cfdb7bf!2sUniversitas%20BSI%20Kampus%20Cibitung!5e0!3m2!1sid!2sid!4v1733225589627!5m2!1sid!2sid" 
+                allowfullscreen>
+            </iframe>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <canvas class="animated-background"></canvas>
+        <div class="footer-container">
+            <!-- About Company -->
+            <div class="logo-footer">
+              <img src="images/1000145552_processed.jpg.png" alt="Ethereal Florist Logo">
+            </div>
+            <div class="footer-column">
+                <h3>ABOUT COMPANY</h3>
+                <p> Kami adalah toko bunga yang didirikan oleh 3 mahasiswa dengan semangat tinggi untuk menghadirkan keindahan alam ke dalam kehidupan sehari-hari.</p>
+                <p>Mari jadikan setiap hari lebih berarti dengan keindahan bunga dari <b>Ethereal Florist</b>.</p>
+                <div class="social-icons-footer">
+                  <a href="https://instagram.com" target="_blank" class="social-icon instagram">
+                    <img src="images/iconinstagram.svg" alt="Instagram">
+                  </a>
+                  <a href="https://facebook.com" target="_blank" class="social-icon facebook">
+                    <img src="images/iconfacebook.svg" alt="Facebook">
+                  </a>
+                  <a href="https://wa.me/1234567890" target="_blank" class="social-icon whatsapp">
+                    <img src="images/iconwhatsapp.svg" alt="WhatsApp">
+                  </a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>SUBSCRIBE TO OUR NEWSLATTER</h3>
+                <form action="index.html" method="GET">
+                  <div class="search-box">
+                      <input type="email" name="email" placeholder="Enter your e-mail" required>
+                      <button type="submit">Subscribe</button>
+                  </div>
+              </form>
+                <p>
+                  <a href="https://goo.gl/maps/xyz" target="_blank" title="Alamat Universitas BSI">
+                      <span>&#x1f3e0;</span> Universitas Bina Sarana Informatika - Jl. KH. Ahmad Marzuk, Cibuntu, Kec. Cibitung, Bekasi, Jawa Barat.
+                  </a>
+                  <br>
+                  <a href="mailto:Alfathanugrah2002@gmail.com" title="Kirim Email">
+                      <span>&#x2709;</span> Alfathanugrah2002@gmail.com
+                  </a>
+                  <br>
+                  <a href="tel:+6283245627278" title="Hubungi Nomor Telepon">
+                      <span>&#x260e;</span> 083245627278
+                  </a>
+              </p>
+            </div>
+    
+            <!-- Opening Hours -->
+            <div class="footer-column">
+                <h3>OPENING HOURS</h3>
+                  <div class="hour-item">
+                      <span>Monday to Friday</span>
+                      <span>9:00 - 22:00</span>
+                  </div>
+                  <div class="hour-item">
+                      <span>Saturday</span>
+                      <span>9:00 - 22:00</span>
+                  </div>
+                  <div class="hour-item closed">
+                      <span>Sunday</span>
+                      <span>Closed</span>
+                  </div>
+              </div>
+              
+            </div>
+        </div>
+    
+        <div class="footer-bottom">
+          <div class="border"></div>
+          &copy; Copyright ©2024 All rights reserved | This template is made with ❤ by Kelompok 1
+      </div>
+    </footer>
+      <!-- Chatbox -->
+    <div class="feedback-float">
+      <div class="chatbox" id="chatbox">
+          <div class="chatbox-header">
+              <img src="images/cat.jpg" alt="Profile" class="chatbox-avatar" />
+              <span class="notification-dot"></span>
+              <div class="chatbox-info">
+                  <h4>Oyen</h4>
+                  <p>Online</p>
+              </div>
+              <div class="close-dot" onclick="toggleChatbox()">
+                  <img src="images/close-button.png" alt="Close Chatbox" />
+              </div>
+          </div>
+          <div class="chatbox-body" id="chatbox-body">
+            <span class="chatbox-time" id="chatbox-time"></span>
+            <div class="chatbox-message">
+                <div id="typing-indicator" class="typing-indicator" style="display: none;">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div id="chatbox-content">
+                    <p id="dynamic-text"></p>
+                </div>
+            </div>
+        </div>
+        <div class="send-box">
+            <input type="text" placeholder="Enter Your Message..." id="user-input" />
+            <button id="send-button" onclick="handleSendMessage()">Send</button>
+        </div>      
+      </div>
+      <div class="feedback-icon" onclick="toggleChatbox()">
+          <img src="images/chatboxicon1.png" alt="Feedback" />
+      </div>
+    </div>
+
+    <!-- AOS JS for Scroll Animations -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Form Alert Animation
+        const contactForm = document.getElementById('contact-form');
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('Pesan Anda berhasil dikirim! Kami akan segera menghubungi Anda.');
+            contactForm.reset();
+        });
+        
+                 // ini animasi foooter
+                 const canvas = document.querySelector('.animated-background');
+        const ctx = canvas.getContext('2d');
+        let width, height, particles;
+
+        function init() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = document.querySelector('footer').offsetHeight;
+            particles = [];
+            for (let i = 0; i < 100; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    size: Math.random() * 3 + 1,
+                    speedX: (Math.random() - 0.5) * 2,
+                    speedY: (Math.random() - 0.5) * 2
+                });
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => {
+                p.x += p.speedX;
+                p.y += p.speedY;
+
+                if (p.x < 0 || p.x > width) p.speedX *= -1;
+                if (p.y < 0 || p.y > height) p.speedY *= -1;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(224, 113, 8, 0.6)';
+                ctx.fill();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', init);
+        init();
+        animate();
+        function toggleChatbox() {
+          const chatbox = document.getElementById("chatbox");
+          const feedbackIcon = document.querySelector(".feedback-icon");
+        
+          if (!chatbox || !feedbackIcon) return; // Cegah error jika elemen tidak ditemukan
+        
+          if (chatbox.classList.contains("open")) {
+            chatbox.classList.remove("open");
+            setTimeout(() => {
+              chatbox.style.display = "none";
+              feedbackIcon.classList.remove("hidden"); // Tampilkan ikon feedback kembali
+            }, 300); // Sesuaikan dengan durasi animasi CSS
+            document.removeEventListener("click", handleOutsideClick);
+          } else {
+            chatbox.style.display = "flex";
+            feedbackIcon.classList.add("hidden");
+            setTimeout(() => {
+              chatbox.classList.add("open");
+            }, 10);
+        
+            function updateTime() {
+              const timeElement = document.getElementById('chatbox-time');
+              if (!timeElement) return;
+        
+              const now = new Date();
+              const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+              const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        
+              const day = days[now.getDay()];
+              const date = now.getDate();
+              const month = months[now.getMonth()];
+        
+              timeElement.textContent = `${day}, ${date} ${month}`;
+            }
+        
+            updateTime();
+        
+            // Tampilkan animasi mengetik
+            const typingIndicator = document.getElementById("typing-indicator");
+            const chatboxContent = document.getElementById("chatbox-content");
+            if (typingIndicator && chatboxContent) {
+              typingIndicator.style.display = "flex";
+              chatboxContent.style.display = "none";
+        
+              setTimeout(() => {
+                typingIndicator.style.display = "none";
+                chatboxContent.style.display = "block";
+                simulateTyping("Haloo!!! 👋 Selamat Datang Di ETHEREAL FLORIST Ada Yang Bisa Saya Bantu?");
+              }, 2000); // Durasi animasi "sedang mengetik"
+            }
+        
+            document.addEventListener("click", handleOutsideClick);
+          }
+        }
+        
+        function handleOutsideClick(event) {
+          const chatbox = document.getElementById("chatbox");
+          const feedbackIcon = document.querySelector(".feedback-icon");
+        
+          if (!chatbox.contains(event.target) && !feedbackIcon.contains(event.target)) {
+            toggleChatbox();
+          }
+        }
+        
+        function simulateTyping(text) {
+          const dynamicText = document.getElementById("dynamic-text");
+          if (!dynamicText) return;
+        
+          dynamicText.textContent = ""; // Hapus teks sebelumnya
+          let index = 0;
+        
+          const interval = setInterval(() => {
+            if (index < text.length) {
+              dynamicText.textContent += text.charAt(index);
+              index++;
+            } else {
+              clearInterval(interval);
+            }
+          }, 50);
+        }
+        document.getElementById('user-input').addEventListener('keypress', function (event) {
+            if (event.key === 'Enter') {
+                handleSendMessage(); // Panggil fungsi kirim pesan
+                event.preventDefault(); // Mencegah tindakan default (jika ada)
+            }
+        });
+          // Fungsi untuk mengirim pesan
+          function handleSendMessage() {
+            const userInput = document.getElementById("user-input");
+            const chatboxBody = document.getElementById("chatbox-body");
+        
+            if (!userInput || !chatboxBody || userInput.value.trim() === "") return;
+        
+            // Tambahkan pesan pengguna
+            const userMessage = document.createElement("div");
+            userMessage.className = "user-message";
+            userMessage.textContent = userInput.value;
+            chatboxBody.appendChild(userMessage);
+        
+            userInput.value = "";
+        
+            // Panggil fungsi untuk menggulir ke bawah
+            scrollToBottom();
+        
+            // Tambahkan balasan sistem
+            showSystemResponse("Hubungi Kami Kapan Saja");
+        }
+        
+        function showSystemResponse(responseText) {
+            const chatboxBody = document.getElementById("chatbox-body");
+            if (!chatboxBody) return;
+        
+            // Bungkus typing-indicator dalam elemen chatbox-message
+            const chatboxMessage = document.createElement("div");
+            chatboxMessage.className = "chatbox-message";
+        
+            const typingIndicator = document.createElement("div");
+            typingIndicator.className = "typing-indicator";
+            typingIndicator.innerHTML = `<span></span><span></span><span></span>`;
+            chatboxMessage.appendChild(typingIndicator);
+        
+            chatboxBody.appendChild(chatboxMessage);
+            scrollToBottom();
+        
+            setTimeout(() => {
+                chatboxBody.removeChild(chatboxMessage);
+        
+                // Bungkus pesan sistem dalam elemen chatbox-message
+                const systemMessageWrapper = document.createElement("div");
+                systemMessageWrapper.className = "chatbox-message";
+        
+                // Tambahkan pesan sistem
+                systemMessageWrapper.innerHTML = `
+                    <p>${responseText}</p>
+                    <p>
+                        Silahkan Klik <a href="https://wa.me/628123456789" target="_blank" style="color: white; text-decoration: underline;">
+                        Di Sini. <img src="images/iconwhatsapp.png" alt="Icon" style="width: 14px; height: 16px; margin-left: 2px; vertical-align: middle;"></a>
+                    </p>
+                `;
+        
+                chatboxBody.appendChild(systemMessageWrapper);
+                scrollToBottom();
+            }, 2000);
+        }
+        
+        
+        function scrollToBottom() {
+            const chatboxBody = document.getElementById("chatbox-body");
+            if (chatboxBody) {
+                chatboxBody.scrollTop = chatboxBody.scrollHeight; // Gulir ke bagian bawah
+            }
+        }
+        // Panggil `scrollToBottom` setelah menambahkan elemen
+        chatboxBody.appendChild(chatboxMessage);
+        scrollToBottom();
+        
+        
+          // Tambahkan event listener untuk tombol kirim
+          document.getElementById("send-button")?.addEventListener("click", handleSendMessage);
+    </script>
+</body>
+</html>

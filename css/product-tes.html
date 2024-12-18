@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produk Unggulan dengan Popup</title>
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fdfaf5;
+            color: #333;
+        }
+
+        /* Produk Unggulan */
+        .featured-products {
+            margin: 40px auto;
+            max-width: 1200px;
+            text-align: center;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: auto;
+        }
+
+        .product-card h3 {
+            margin: 10px 0;
+            font-size: 1.2rem;
+            color: #444;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Popup Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        /* Modal Content - Layout 2 Kolom */
+.modal-content {
+    display: flex; /* Flexbox */
+    background: #fff;
+    border-radius: 10px;
+    max-width: 800px; /* Lebarkan modal */
+    width: 90%;
+    padding: 20px;
+    position: relative;
+}
+
+.modal-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    height: 450px;
+    width: auto;
+}
+
+.modal-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.modal-details {
+    flex: 2; /* Bagian kanan mengambil 2 bagian */
+    padding: 0 20px;
+    text-align: left;
+}
+
+.modal-details h3 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.tab-buttons {
+    display: flex;
+    justify-content: flex-start; /* Rata kiri */
+    margin: 20px 0;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.tab-buttons button {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #666;
+    transition: color 0.3s;
+}
+
+.tab-buttons button.active {
+    color: #4CAF50;
+    border-bottom: 2px solid #4CAF50;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5rem;
+    color: #333;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: red;
+}
+    </style>
+</head>
+<body>
+    <!-- Produk Unggulan -->
+    <section class="featured-products">
+        <h2>Produk Unggulan</h2>
+        <div class="product-grid" id="product-grid">
+            <!-- Produk akan dimuat menggunakan JavaScript -->
+        </div>
+    </section>
+
+    <!-- Modal Popup -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <!-- Gambar di Kiri -->
+            <div class="modal-image">
+                <img id="modalImage" src="" alt="Produk">
+            </div>
+        
+            <!-- Detail Produk di Kanan -->
+            <div class="modal-details">
+                <span class="close-btn" id="closeModal">&times;</span>
+                <h3 id="modalTitle"></h3>
+        
+                <!-- Tab Navigasi -->
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="description">DESKRIPSI</button>
+                    <button class="tab-btn" data-tab="shipping">PENGIRIMAN</button>
+                    <button class="tab-btn" data-tab="notes">CATATAN PENTING</button>
+                </div>
+        
+                <!-- Tab Konten -->
+                <div class="tab-content active" id="description">
+                    <p id="descriptionContent"></p>
+                </div>
+                <div class="tab-content" id="shipping">
+                    <p id="shippingContent"></p>
+                </div>
+                <div class="tab-content" id="notes">
+                    <p id="notesContent"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data Produk
+        const products = [
+            { 
+                name: "Bouquet of Roses",
+                price: "Rp 50.000", 
+                image: "products/product1.jpg",
+                description: "Bouquet bunga mawar merah yang cantik dan elegan.",
+                shipping: "Pengiriman tersedia untuk area Jabodetabek.",
+                notes: "Bunga dapat diganti sesuai ketersediaan musim."
+            },
+            { 
+                name: "Lovely Lily", 
+                image: "products/product2.jpeg",
+                description: "Rangkaian bunga lily putih yang mewah.",
+                shipping: "Pengiriman tersedia untuk seluruh Indonesia.",
+                notes: "Bunga lily segar dengan kualitas terbaik."
+            },
+            { 
+                name: "Sunflower Basket", 
+                image: "products/product3.jpeg",
+                description: "Keranjang bunga matahari yang ceria dan penuh semangat.",
+                shipping: "Pengiriman dilakukan dalam waktu 1-2 hari.",
+                notes: "Bunga matahari segar dari kebun pilihan."
+            },
+            { 
+                name: "Orchid Arrangement", 
+                image: "products/product8.jpg",
+                description: "Rangkaian anggrek ungu yang anggun dan menawan.",
+                shipping: "Tersedia pengiriman ke seluruh kota besar.",
+                notes: "Anggrek dalam vas keramik hitam elegan."
+            }
+        ];
+
+        // Load Produk
+        const productGrid = document.getElementById('product-grid');
+        products.forEach((product, index) => {
+            const productCard = document.createElement('div');
+            productCard.classList.add('product-card');
+            productCard.innerHTML = `
+                <img src="${product.image}" alt="${product.name}">
+                <h3>${product.name}</h3>
+            `;
+            productCard.addEventListener('click', () => openModal(index));
+            productGrid.appendChild(productCard);
+        });
+
+        // Modal
+        const modal = document.getElementById('productModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalTitle = document.getElementById('modalTitle');
+        const descriptionContent = document.getElementById('descriptionContent');
+        const shippingContent = document.getElementById('shippingContent');
+        const notesContent = document.getElementById('notesContent');
+        const closeModalBtn = document.getElementById('closeModal');
+
+        function openModal(index) {
+            const product = products[index];
+            modalImage.src = product.image;
+            modalTitle.textContent = product.name;
+            descriptionContent.textContent = product.description;
+            shippingContent.textContent = product.shipping;
+            notesContent.textContent = product.notes;
+
+            modal.style.display = 'flex';
+        }
+
+        closeModalBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Tab Navigasi
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                // Add active class to clicked tab
+                button.classList.add('active');
+                document.getElementById(button.dataset.tab).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

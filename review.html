@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Review</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-chatbox.css">
+</head>
+<style>
+        body {
+        margin: 0;
+        padding: 0;
+        font-style: normal;
+        margin: 0;
+        color: #333;
+        line-height: 1.6;
+        height: 100%;
+        background-blend-mode: overlay; /* Overlay untuk mencampur gradient dengan pattern */
+        background-size: cover;
+        background-attachment: fixed; /* Membuat background tidak bergerak saat scroll */
+        }
+/* Customer Review Section */
+.customer-review {
+    text-align: center;
+    padding: 40px 20px;
+}
+.customer-review h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #e4763e;
+}
+
+.customer-review p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.review-cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.review-card {
+    background: linear-gradient(135deg, #ffffff, #e65d22);
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.review-card.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.review-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.review-stars {
+    font-size: 1.2rem;
+    color: gold;
+    margin-bottom: 10px;
+}
+
+.review-stars span {
+    margin: 0 1px;
+}
+
+.review-card .review-text {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.review-card .customer-name {
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.review-card .review-date {
+    font-size: 0.8rem;
+    color: #4a4844;
+}
+/* Footer */
+footer {
+  color: #0c0c0c;
+  padding: 20px 0;
+  overflow: hidden;
+  position: relative;
+  margin-top: auto;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.animated-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: #d4d4d4; /* Background gelap untuk animasi */
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-column {
+  flex: 1;
+  margin: 0 15px;
+}
+
+.footer-column h3 {
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.footer-column p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.footer-column a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer-column a:hover {
+  text-decoration: underline;
+}
+.footer-column p a {
+  color: #000; /* Warna teks link */
+  text-decoration: none; /* Hilangkan garis bawah */
+  font-size: 14px;
+  line-height: 1.5;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px; /* Jarak antara ikon dan teks */
+}
+
+.footer-column p a:hover {
+  color: #ee743f; /* Warna saat hover */
+  text-decoration: underline;
+}
+
+.social-icons-footer {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+  position: absolute;
+  left: 39.7%;
+  bottom: 16%;
+}
+
+.social-icons-footer a {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-color: #fa8231;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  background-color: #ee743f;
+}
+.social-icons-footer img{
+width: 15px;
+height: 15px;
+}
+
+.opening-hours {
+  font-family: Arial, sans-serif;
+  color: #ff0404;
+  background-color: #fdfaf5; /* Warna latar belakang */
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px; /* Lebar maksimal */
+  margin: auto;
+}
+
+.hour-item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #c96d11;
+  padding: 8px 0;
+  font-size: 14px;
+  color: #000000;
+}
+
+.hour-item:last-child {
+  border-bottom: none; /* Hapus garis bawah terakhir */
+}
+
+.hour-item.closed {
+  color: #e74c3c; /* Warna merah untuk Closed */
+  font-weight: bold;
+}
+
+
+.footer-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  font-size: 14px;
+}
+
+.footer-bottom .border {
+  width: 1200px; /* Sesuaikan panjang border */
+  height: 1px;
+  background-color: #444;
+  margin-bottom: 10px; /* Atur jarak garis dengan teks */
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d3d3d3;
+  border-radius: 50px;
+  padding: 2px 2px;
+  background-color: #f3f3f3;
+  width:270px;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  color:  #ee743f;
+  flex-grow: 1;
+  padding: 1px 1px;
+}
+
+.search-box button {
+  border: none;
+  outline: none;
+  background: linear-gradient(45deg, #ee743f,  #5348c5); /* Gradien warna */
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 5px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow default */
+}
+
+.search-box button:hover {
+  background: linear-gradient(45deg, #5348c5, #ee743f); /* Gradien warna */
+  transform: translateY(-3px); /* Efek angkat */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Shadow lebih besar */
+  color: #ffffff; /* Warna teks tetap putih */
+}
+.search-box ::placeholder{
+  font-size: 12px;
+  padding-left: 10px;
+}
+
+.logo-footer {
+  display: flex;
+  text-align: center;
+  padding: 0px 0;
+  display: flex;
+  margin-left: -200px;
+  margin-right: 50px;
+  position: absolute;
+  left: 13%;
+  bottom: 28%;
+}
+
+.logo-footer img {
+  height: 160px;
+}
+</style>
+<script>
+  // On-scroll animation for review cards
+  document.addEventListener('DOMContentLoaded', () => {
+      const reviewCards = document.querySelectorAll('.review-card');
+
+      const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                  entry.target.classList.add('show');
+              }
+          });
+      }, {
+          threshold: 0.2,
+      });
+
+      reviewCards.forEach((card) => observer.observe(card));
+  });
+</script>
+<body>
+        <!-- Logo Section -->
+    <!-- Logo Section -->
+    <div class="logo-container">
+        <img src="images/1000145552_processed.jpg.png" alt="Ethereal Florist Logo">
+      </div>
+    
+      <!-- Header Section -->
+      <header>
+        <!-- Navigation -->
+        <nav class="navbar">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="ourproducts.html">Our Product</a></li>
+            <li><a href="aboutus.html">About Us</a></li>
+            <li><a href="Contactus.html">Contact Us</a></li>
+            <li><a href="review.html">Review</a></li>
+          </ul>
+        </nav>
+    
+        <!-- Icons -->
+        <div class="header-icons">
+        <a href="login_form.php" target="_blank" class="admin-link">
+            <img src="images/user icon.jpg" alt="User Icon" class="admin-icon">
+            <span class="admin-text">Login</span>
+        </a>
+    </div>
+      </header>
+
+</div>
+  </header>
+    <section class="customer-review">
+        <h2>CUSTOMER REVIEW</h2>
+        <p>Kepuasan pelanggan sangat penting, itulah yang harus membuat kami melangkah pasti.</p>
+        <div class="review-cards">
+            <div class="review-card">
+                <img src="images/Review1.jpg" alt="Customer Photo">
+                <div class="review-stars">
+                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+                <p class="review-text">
+                    "Rangkaian bunga dari Ethereal Florist sangat cantik dan elegan! Bunganya segar, pengiriman tepat waktu, dan pelayanannya ramah. Pasti pesan lagi!"
+                </p>
+                <p class="customer-name">Angel</p>
+                <p class="review-date">18-December-2024</p>
+            </div>
+            <div class="review-card">
+                <img src="images/Review2.jpg" alt="Customer Photo">
+                <div class="review-stars">
+                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+                <p class="review-text">
+                    "Pelayanan di Ethereal Florist luar biasa! Staffnya sabar membantu saya memilih bunga, dan hasilnya memukau. Sangat puas!"
+                </p>
+                <p class="customer-name">George</p>
+                <p class="review-date">17-December-2024</p>
+            </div>
+            <div class="review-card">
+                <img src="images/Review3.jpg" alt="Customer Photo">
+                <div class="review-stars">
+                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+                <p class="review-text">
+                    "Desain bunga di Ethereal Florist unik dan berkualitas. Cocok untuk acara spesial. Harga terjangkau. Layanan memuaskan!"
+                </p>
+                <p class="customer-name">John</p>
+                <p class="review-date">16-December-2024</p>
+            </div>
+        </div>
+    </section>
+    <footer >
+        <canvas class="animated-background"></canvas>
+        <div class="footer-container" >
+            <!-- About Company -->
+            <div class="logo-footer">
+              <img src="images/1000145552_processed.jpg.png" alt="Ethereal Florist Logo" >
+            </div>
+            <div class="footer-column">
+                <h3>ABOUT COMPANY</h3>
+                <p> Kami adalah toko bunga yang didirikan oleh 3 mahasiswa dengan semangat tinggi untuk menghadirkan keindahan alam ke dalam kehidupan sehari-hari.</p>
+                <p>Mari jadikan setiap hari lebih berarti dengan keindahan bunga dari <b>Ethereal Florist</b>.</p>
+                <div class="social-icons-footer">
+                  <a href="https://instagram.com" target="_blank" class="social-icon instagram">
+                    <img src="images/iconinstagram.svg" alt="Instagram">
+                  </a>
+                  <a href="https://facebook.com" target="_blank" class="social-icon facebook">
+                    <img src="images/iconfacebook.svg" alt="Facebook">
+                  </a>
+                  <a href="https://wa.me/1234567890" target="_blank" class="social-icon whatsapp">
+                    <img src="images/iconwhatsapp.svg" alt="WhatsApp">
+                  </a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>SUBSCRIBE TO OUR NEWSLATTER</h3>
+                <form action="index.html" method="GET">
+                  <div class="search-box">
+                      <input type="email" name="email" placeholder="Enter your e-mail" required>
+                      <button type="submit">Subscribe</button>
+                  </div>
+              </form>
+                <p>
+                  <a href="https://goo.gl/maps/xyz" target="_blank" title="Alamat Universitas BSI">
+                      <span>&#x1f3e0;</span> Universitas Bina Sarana Informatika - Jl. KH. Ahmad Marzuk, Cibuntu, Kec. Cibitung, Bekasi, Jawa Barat.
+                  </a>
+                  <br>
+                  <a href="mailto:Alfathanugrah2002@gmail.com" title="Kirim Email">
+                      <span>&#x2709;</span> Alfathanugrah2002@gmail.com
+                  </a>
+                  <br>
+                  <a href="tel:+6283245627278" title="Hubungi Nomor Telepon">
+                      <span>&#x260e;</span> 083245627278
+                  </a>
+              </p>
+              
+            </div>
+    
+            <!-- Opening Hours -->
+            <div class="footer-column">
+                <h3>OPENING HOURS</h3>
+                  <div class="hour-item">
+                      <span>Monday to Friday</span>
+                      <span>9:00 - 22:00</span>
+                  </div>
+                  <div class="hour-item">
+                      <span>Saturday</span>
+                      <span>9:00 - 22:00</span>
+                  </div>
+                  <div class="hour-item closed">
+                      <span>Sunday</span>
+                      <span>Closed</span>
+                  </div>
+              </div>
+              
+            </div>
+        </div>
+    
+        <div class="footer-bottom">
+          <div class="border"></div>
+          &copy; Copyright ©2024 All rights reserved | This template is made with ❤ by Kelompok 1
+      </div>
+    </footer>
+      <!-- Chatbox -->
+    <div class="feedback-float">
+      <div class="chatbox" id="chatbox">
+          <div class="chatbox-header">
+              <img src="images/cat.jpg" alt="Profile" class="chatbox-avatar" />
+              <span class="notification-dot"></span>
+              <div class="chatbox-info">
+                  <h4>Oyen</h4>
+                  <p>Online</p>
+              </div>
+              <div class="close-dot" onclick="toggleChatbox()">
+                  <img src="images/close-button.png" alt="Close Chatbox" />
+              </div>
+          </div>
+          <div class="chatbox-body" id="chatbox-body">
+            <span class="chatbox-time" id="chatbox-time"></span>
+            <div class="chatbox-message">
+                <div id="typing-indicator" class="typing-indicator" style="display: none;">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div id="chatbox-content">
+                    <p id="dynamic-text"></p>
+                </div>
+            </div>
+        </div>
+        <div class="send-box">
+            <input type="text" placeholder="Enter Your Message..." id="user-input" />
+            <button id="send-button" onclick="handleSendMessage()">Send</button>
+        </div>      
+      </div>
+      <div class="feedback-icon" onclick="toggleChatbox()">
+          <img src="images/chatboxicon1.png" alt="Feedback" />
+      </div>
+    </div>
+    <script>
+         // Counter Animation
+         const counters = document.querySelectorAll('.counter');
+        const speed = 500;
+
+        counters.forEach(counter => {
+            const animate = () => {
+                const value = +counter.getAttribute('data-count');
+                const data = +counter.innerText;
+                const time = value / speed;
+
+                if (data < value) {
+                    counter.innerText = Math.ceil(data + time);
+                    setTimeout(animate, 10);
+                } else {
+                    counter.innerText = value;
+                }
+            };
+            animate();
+        });
+         // ini animasi foooter
+         const canvas = document.querySelector('.animated-background');
+        const ctx = canvas.getContext('2d');
+        let width, height, particles;
+
+        function init() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = document.querySelector('footer').offsetHeight;
+            particles = [];
+            for (let i = 0; i < 100; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    size: Math.random() * 3 + 1,
+                    speedX: (Math.random() - 0.5) * 2,
+                    speedY: (Math.random() - 0.5) * 2
+                });
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => {
+                p.x += p.speedX;
+                p.y += p.speedY;
+
+                if (p.x < 0 || p.x > width) p.speedX *= -1;
+                if (p.y < 0 || p.y > height) p.speedY *= -1;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(224, 113, 8, 0.6)';
+                ctx.fill();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', init);
+        init();
+        animate();
+        function toggleChatbox() {
+          const chatbox = document.getElementById("chatbox");
+          const feedbackIcon = document.querySelector(".feedback-icon");
+        
+          if (!chatbox || !feedbackIcon) return; // Cegah error jika elemen tidak ditemukan
+        
+          if (chatbox.classList.contains("open")) {
+            chatbox.classList.remove("open");
+            setTimeout(() => {
+              chatbox.style.display = "none";
+              feedbackIcon.classList.remove("hidden"); // Tampilkan ikon feedback kembali
+            }, 300); // Sesuaikan dengan durasi animasi CSS
+            document.removeEventListener("click", handleOutsideClick);
+          } else {
+            chatbox.style.display = "flex";
+            feedbackIcon.classList.add("hidden");
+            setTimeout(() => {
+              chatbox.classList.add("open");
+            }, 10);
+        
+            function updateTime() {
+              const timeElement = document.getElementById('chatbox-time');
+              if (!timeElement) return;
+        
+              const now = new Date();
+              const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+              const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        
+              const day = days[now.getDay()];
+              const date = now.getDate();
+              const month = months[now.getMonth()];
+        
+              timeElement.textContent = `${day}, ${date} ${month}`;
+            }
+        
+            updateTime();
+        
+            // Tampilkan animasi mengetik
+            const typingIndicator = document.getElementById("typing-indicator");
+            const chatboxContent = document.getElementById("chatbox-content");
+            if (typingIndicator && chatboxContent) {
+              typingIndicator.style.display = "flex";
+              chatboxContent.style.display = "none";
+        
+              setTimeout(() => {
+                typingIndicator.style.display = "none";
+                chatboxContent.style.display = "block";
+                simulateTyping("Haloo!!! 👋 Selamat Datang Di ETHEREAL FLORIST Ada Yang Bisa Saya Bantu?");
+              }, 2000); // Durasi animasi "sedang mengetik"
+            }
+        
+            document.addEventListener("click", handleOutsideClick);
+          }
+        }
+        
+        function handleOutsideClick(event) {
+          const chatbox = document.getElementById("chatbox");
+          const feedbackIcon = document.querySelector(".feedback-icon");
+        
+          if (!chatbox.contains(event.target) && !feedbackIcon.contains(event.target)) {
+            toggleChatbox();
+          }
+        }
+        
+        function simulateTyping(text) {
+          const dynamicText = document.getElementById("dynamic-text");
+          if (!dynamicText) return;
+        
+          dynamicText.textContent = ""; // Hapus teks sebelumnya
+          let index = 0;
+        
+          const interval = setInterval(() => {
+            if (index < text.length) {
+              dynamicText.textContent += text.charAt(index);
+              index++;
+            } else {
+              clearInterval(interval);
+            }
+          }, 50);
+        }
+        document.getElementById('user-input').addEventListener('keypress', function (event) {
+            if (event.key === 'Enter') {
+                handleSendMessage(); // Panggil fungsi kirim pesan
+                event.preventDefault(); // Mencegah tindakan default (jika ada)
+            }
+        });
+          // Fungsi untuk mengirim pesan
+          function handleSendMessage() {
+            const userInput = document.getElementById("user-input");
+            const chatboxBody = document.getElementById("chatbox-body");
+        
+            if (!userInput || !chatboxBody || userInput.value.trim() === "") return;
+        
+            // Tambahkan pesan pengguna
+            const userMessage = document.createElement("div");
+            userMessage.className = "user-message";
+            userMessage.textContent = userInput.value;
+            chatboxBody.appendChild(userMessage);
+        
+            userInput.value = "";
+        
+            // Panggil fungsi untuk menggulir ke bawah
+            scrollToBottom();
+        
+            // Tambahkan balasan sistem
+            showSystemResponse("Hubungi Kami Kapan Saja");
+        }
+        
+        function showSystemResponse(responseText) {
+            const chatboxBody = document.getElementById("chatbox-body");
+            if (!chatboxBody) return;
+        
+            // Bungkus typing-indicator dalam elemen chatbox-message
+            const chatboxMessage = document.createElement("div");
+            chatboxMessage.className = "chatbox-message";
+        
+            const typingIndicator = document.createElement("div");
+            typingIndicator.className = "typing-indicator";
+            typingIndicator.innerHTML = `<span></span><span></span><span></span>`;
+            chatboxMessage.appendChild(typingIndicator);
+        
+            chatboxBody.appendChild(chatboxMessage);
+            scrollToBottom();
+        
+            setTimeout(() => {
+                chatboxBody.removeChild(chatboxMessage);
+        
+                // Bungkus pesan sistem dalam elemen chatbox-message
+                const systemMessageWrapper = document.createElement("div");
+                systemMessageWrapper.className = "chatbox-message";
+        
+                // Tambahkan pesan sistem
+                systemMessageWrapper.innerHTML = `
+                    <p>${responseText}</p>
+                    <p>
+                        Silahkan Klik <a href="https://wa.me/628123456789" target="_blank" style="color: white; text-decoration: underline;">
+                        Di Sini. <img src="images/iconwhatsapp.png" alt="Icon" style="width: 14px; height: 16px; margin-left: 2px; vertical-align: middle;"></a>
+                    </p>
+                `;
+        
+                chatboxBody.appendChild(systemMessageWrapper);
+                scrollToBottom();
+            }, 2000);
+        }
+        
+        
+        function scrollToBottom() {
+            const chatboxBody = document.getElementById("chatbox-body");
+            if (chatboxBody) {
+                chatboxBody.scrollTop = chatboxBody.scrollHeight; // Gulir ke bagian bawah
+            }
+        }
+        // Panggil `scrollToBottom` setelah menambahkan elemen
+        chatboxBody.appendChild(chatboxMessage);
+        scrollToBottom();
+        
+        
+          // Tambahkan event listener untuk tombol kirim
+          document.getElementById("send-button")?.addEventListener("click", handleSendMessage);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethereal Florist - Produk</title>
+    <!-- Tambahkan SwiperJS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="style-chatbox.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <style>
+        body {
+            font-style: normal;
+            margin: 0;
+            line-height: 1.6;
+            color: #333;
+            padding: 0;
+            overflow:auto;
+            background-color: #ffffff;
+            position: relative;
+            min-height: auto;
+            height: auto;
+        }
+
+        .logo-container {
+            text-align: center;
+            padding: 0px 0;
+            background-color: #ffffff;
+         }
+  
+  .logo-container img {
+    height: 100px;
+  }
+  
+  /* Header Styles */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 0px;
+    background-color: #ffffff;
+    height: 20px;
+    padding-bottom: 2px;
+  }
+  
+  .navbar {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+  }
+  
+  .navbar ul li a {
+    text-decoration: none;
+    font-size: 1rem;
+    color: #333;
+    font-weight: 600;
+    transition: color 0.3s;
+  }
+  
+  .navbar ul li a:hover {
+    color: #fa8231;
+  }
+   /* Header Icons Section - Admin Icon */
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-family: "Forum", serif;
+    margin-right: 20px;
+  }
+  
+  /* Admin Icon Link */
+  .admin-link {
+    display: flex;
+    align-items: center;
+    gap: 0px;
+    text-decoration: none; /* Menghilangkan garis bawah pada teks */
+    color: #333; /* Warna teks default */
+    transition: all 0.3s ease-in-out; /* Efek transisi halus */
+  }
+  
+  .admin-link:hover {
+    color: #fa8231; /* Warna berubah saat hover */
+    transform: translateY(-2px); /* Efek angkat sedikit */
+  }
+  
+  /* Admin Icon Image */
+  .admin-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    padding-bottom: 10px;
+    object-fit: cover;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efek transisi untuk hover */
+  }
+  
+  /* Admin Icon Hover Effect */
+  .admin-icon:hover {
+    transform: scale(1.1); /* Ikon membesar sedikit saat hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Efek bayangan saat hover */
+  }
+  
+  /* Admin Text */
+  .admin-text {
+    font-size: 1rem;
+    font-weight: bold;
+    transition: color 0.3s ease; /* Transisi warna teks */
+  }
+  
+  /* Admin Text Hover */
+  .admin-link:hover .admin-text {
+    color: #fa8231; /* Warna teks berubah saat hover */
+  }
+        /* Promo Banner */
+        .promo-banner {
+            position: relative;
+            overflow: hidden;
+            margin: 0px auto;
+            max-width: 1200px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .swiper-slide {
+            text-align: center;
+            background: #f8f8f8;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+        }
+
+        .swiper-slide img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        /* Featured Products */
+        .featured-products {
+            margin: 40px auto;
+            max-width: 1200px;
+            text-align: center;
+        }
+
+        .featured-products h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #444;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 0 20px;
+        }
+/* Container Produk */
+.product-card {
+    position: relative; /* Menjadikan posisi relatif untuk efek overlay */
+    overflow: hidden; /* Agar efek overlay tidak keluar dari kotak */
+    cursor: pointer; /* Menunjukkan bahwa elemen dapat diklik */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.product-card p {
+        color: #e67e22;
+        font-weight: bold;
+    }
+.product-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+/* Efek Hover pada Kartu Produk */
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+.product-card:hover img {
+    transform: scale(1.1); /* Gambar diperbesar */
+}
+
+/* Overlay Deskripsi */
+.product-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Lapisan gelap transparan */
+    color: #fff; /* Warna teks */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    opacity: 0; /* Awalnya disembunyikan */
+    transition: opacity 0.3s ease;
+    padding: 10px;
+}
+
+.product-card:hover .product-overlay {
+    opacity: 1; /* Muncul ketika dihover */
+}
+
+/* Tombol atau Teks Lihat Detail */
+.product-overlay .details-btn {
+    margin-top: 10px;
+    display: inline-block;
+    padding: 8px 15px;
+    background: #e67e22;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.product-overlay .details-btn:hover {
+    background: #d35400; /* Warna tombol saat dihover */
+}
+
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .product-card {
+            animation: fadeInUp 1s ease-in-out;
+        }
+        .other-products {
+        margin: 40px auto;
+        max-width: 1200px;
+        text-align: center;
+    }
+
+    .other-products h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        color: #444;
+    }
+
+    .product-grid-small {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+        padding: 0 20px;
+    }
+
+    .product-card-small {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .product-card-small img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .product-card-small h3 {
+        margin: 10px 0;
+        font-size: 1rem;
+        color: #444;
+    }
+
+    .product-card-small p {
+        color: #e67e22;
+        font-weight: bold;
+    }
+    .product-card-small p:last-of-type {
+    font-size: 14px;
+    color: #ffffff;
+    margin-top: 5px;
+    background-color: rgb(76, 74, 74);
+    text-align: left;
+    font-weight: 300;
+    padding-left: 5px;
+    margin: 0;
+}
+
+
+    .product-card-small:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .product-card-small:hover img {
+        transform: scale(1.05);
+    }
+        /* Popup Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        /* Modal Content - Layout 2 Kolom */
+.modal-content {
+    display: flex; /* Flexbox */
+    background: #fff;
+    border-radius: 10px;
+    max-width: 800px; /* Lebarkan modal */
+    width: 90%;
+    padding: 20px;
+    position: relative;
+}
+
+.modal-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    height: 450px;
+    width: auto;
+}
+
+.modal-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.modal-details {
+    flex: 2; /* Bagian kanan mengambil 2 bagian */
+    padding: 0 20px;
+    text-align: left;
+}
+
+.modal-details h3 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    color: #fa8231;
+}
+.tab-buttons {
+    display: flex;
+    justify-content: flex-start; /* Rata kiri */
+    margin: 20px 0;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.tab-buttons button {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #666;
+    transition: color 0.3s;
+}
+
+.tab-buttons button.active {
+    color: #fa8231;
+    border-bottom: 2px solid #fa8231;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.close-btn {
+    position: absolute;
+    top: 8px;
+    right: 15px;
+    font-size: 2.5rem;
+    color: #fa8231;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: red;
+}
+footer {
+  color: #0c0c0c;
+  padding: 20px 0;
+  overflow: hidden;
+  position: relative;
+  margin-top: auto;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.animated-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: #d4d4d4; /* Background gelap untuk animasi */
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-column {
+  flex: 1;
+  margin: 0 15px;
+}
+
+.footer-column h3 {
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.footer-column p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.footer-column a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer-column a:hover {
+  text-decoration: underline;
+}
+.footer-column p a {
+  color: #000; /* Warna teks link */
+  text-decoration: none; /* Hilangkan garis bawah */
+  font-size: 14px;
+  line-height: 1.5;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px; /* Jarak antara ikon dan teks */
+}
+
+.footer-column p a:hover {
+  color: #ee743f; /* Warna saat hover */
+  text-decoration: underline;
+}
+
+.social-icons-footer {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+  position: absolute;
+  left: 39.7%;
+  bottom: 16%;
+}
+
+.social-icons-footer a {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-color: #fa8231;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  background-color: #ee743f;
+}
+.social-icons-footer img{
+width: 15px;
+height: 15px;
+}
+
+.opening-hours {
+  font-family: Arial, sans-serif;
+  color: #ff0404;
+  background-color: #fdfaf5; /* Warna latar belakang */
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px; /* Lebar maksimal */
+  margin: auto;
+}
+
+.hour-item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #c96d11;
+  padding: 8px 0;
+  font-size: 14px;
+  color: #000000;
+}
+
+.hour-item:last-child {
+  border-bottom: none; /* Hapus garis bawah terakhir */
+}
+
+.hour-item.closed {
+  color: #e74c3c; /* Warna merah untuk Closed */
+  font-weight: bold;
+}
+
+
+.footer-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  font-size: 14px;
+}
+
+.footer-bottom .border {
+  width: 1200px; /* Sesuaikan panjang border */
+  height: 1px;
+  background-color: #444;
+  margin-bottom: 10px; /* Atur jarak garis dengan teks */
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d3d3d3;
+  border-radius: 50px;
+  padding: 2px 2px;
+  background-color: #f3f3f3;
+  width:270px;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  color:  #ee743f;
+  flex-grow: 1;
+  padding: 1px 1px;
+}
+
+.search-box button {
+  border: none;
+  outline: none;
+  background: linear-gradient(45deg, #ee743f,  #5348c5); /* Gradien warna */
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 5px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow default */
+}
+
+.search-box button:hover {
+  background: linear-gradient(45deg, #5348c5, #ee743f); /* Gradien warna */
+  transform: translateY(-3px); /* Efek angkat */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Shadow lebih besar */
+  color: #ffffff; /* Warna teks tetap putih */
+}
+.search-box ::placeholder{
+  font-size: 12px;
+  padding-left: 10px;
+}
+
+.logo-footer {
+  display: flex;
+  text-align: center;
+  padding: 0px 0;
+  display: flex;
+  margin-left: -200px;
+  margin-right: 50px;
+  position: absolute;
+  left: 13%;
+  bottom: 28%;
+}
+
+.logo-footer img {
+  height: 160px;
+}
+
+    </style>
+</head>
+<body>
+ <!-- Logo Section -->
+ <div class="logo-container">
+    <img src="images/1000145552_processed.jpg.png" alt="Ethereal Florist Logo">
+  </div>
+
+  <!-- Header Section -->
+  <header>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="ourproducts.html">Our Product</a></li>
+        <li><a href="aboutus.html">About Us</a></li>
+        <li><a href="Contactus.html">Contact Us</a></li>
+        <li><a href="review.html">Review</a></li>
+      </ul>
+    </nav>
+
+    <!-- Icons -->
+    <div class="header-icons">
+    <a href="login_form.php" target="_blank" class="admin-link">
+        <img src="images/user icon.jpg" alt="User Icon" class="admin-icon">
+        <span class="admin-text">Login</span>
+    </a>
+</div>
+  </header>
+
+    <!-- Promo Banner -->
+    <section class="promo-banner">
+        <div class="swiper promo-slider">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="products/Diskon1.jpg" alt="Diskon 1">
+                </div>
+                <div class="swiper-slide">
+                    <img src="products/Diskon2.jpg" alt="Diskon 2">
+                </div>
+                <div class="swiper-slide">
+                    <img src="products/Diskon3.jpg" alt="Diskon 3">
+                </div>
+                <div class="swiper-slide">
+                    <h1>DISKON UP TO <span style="color: #e67e22;">70%</span></h1>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured-products">
+        <h2>Produk Unggulan</h2>
+        <div class="product-grid" id="product-grid">
+            <!-- Produk akan dimuat menggunakan JavaScript -->
+        </div>
+    </section>
+
+    <!-- Modal Popup -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <!-- Gambar di Kiri -->
+            <div class="modal-image">
+                <img id="modalImage" src="" alt="Produk">
+            </div>
+
+            <!-- Detail Produk di Kanan -->
+            <div class="modal-details">
+                <span class="close-btn" id="closeModal">&times;</span>
+                <h3 id="modalTitle"></h3>
+                <p id="modalPrice" style="color:black; font-weight: bold; font-size: 18px; "></p>
+
+                <!-- Tab Navigasi -->
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="description">DESKRIPSI</button>
+                    <button class="tab-btn" data-tab="shipping">PENGIRIMAN</button>
+                    <button class="tab-btn" data-tab="notes">CATATAN PENTING</button>
+                </div>
+
+                <!-- Tab Konten -->
+                <div class="tab-content active" id="description">
+                    <p id="descriptionContent"></p>
+                </div>
+                <div class="tab-content" id="shipping">
+                    <p id="shippingContent"></p>
+                </div>
+                <div class="tab-content" id="notes">
+                    <p id="notesContent"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="other-products">
+        <h2>Produk Lainnya</h2>
+        <div class="product-grid-small" id="other-product-grid">
+            <!-- Produk tambahan akan dimuat disini menggunakan JavaScript -->
+        </div>
+    </section>
+    <footer>
+        <canvas class="animated-background"></canvas>
+        <div class="footer-container">
+            <!-- About Company -->
+            <div class="logo-footer">
+              <img src="images/1000145552_processed.jpg.png" alt="Ethereal Florist Logo">
+            </div>
+            <div class="footer-column">
+                <h3>ABOUT COMPANY</h3>
+                <p> Kami adalah toko bunga yang didirikan oleh 3 mahasiswa dengan semangat tinggi untuk menghadirkan keindahan alam ke dalam kehidupan sehari-hari.</p>
+                <p>Mari jadikan setiap hari lebih berarti dengan keindahan bunga dari <b>Ethereal Florist</b>.</p>
+                <div class="social-icons-footer">
+                  <a href="https://instagram.com" target="_blank" class="social-icon instagram">
+                    <img src="images/iconinstagram.svg" alt="Instagram">
+                  </a>
+                  <a href="https://facebook.com" target="_blank" class="social-icon facebook">
+                    <img src="images/iconfacebook.svg" alt="Facebook">
+                  </a>
+                  <a href="https://wa.me/1234567890" target="_blank" class="social-icon whatsapp">
+                    <img src="images/iconwhatsapp.svg" alt="WhatsApp">
+                  </a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>SUBSCRIBE TO OUR NEWSLATTER</h3>
+                <form action="index.html" method="GET">
+                  <div class="search-box">
+                      <input type="email" name="email" placeholder="Enter your e-mail" required>
+                      <button type="submit">Subscribe</button>
+                  </div>
+              </form>
+                <p>
+                  <a href="https://goo.gl/maps/xyz" target="_blank" title="Alamat Universitas BSI">
+                      <span>&#x1f3e0;</span> Universitas Bina Sarana Informatika - Jl. KH. Ahmad Marzuk, Cibuntu, Kec. Cibitung, Bekasi, Jawa Barat.
+                  </a>
+                  <br>
+                  <a href="mailto:Alfathanugrah2002@gmail.com" title="Kirim Email">
+                      <span>&#x2709;</span> Alfathanugrah2002@gmail.com
+                  </a>
+                  <br>
+                  <a href="tel:+6283245627278" title="Hubungi Nomor Telepon">
+                      <span>&#x260e;</span> 083245627278
+                  </a>
+              </p>
+              
+            </div>
+    
+            <!-- Opening Hours -->
+            <div class="footer-column">
+                <h3>OPENING HOURS</h3>
+                  <div class="hour-item">
+                      <span>Monday to Friday</span>
+                      <span>9:00 - 22:00</span>
+                  </div>
+                  <div class="hour-item">
+                      <span>Saturday</span>
+                      <span>9:00 - 22:00</span>
+                  </div>
+                  <div class="hour-item closed">
+                      <span>Sunday</span>
+                      <span>Closed</span>
+                  </div>
+              </div>
+              
+            </div>
+        </div>
+    
+        <div class="footer-bottom">
+          <div class="border"></div>
+          &copy; Copyright ©2024 All rights reserved | This template is made with ❤ by Kelompok 1
+      </div>
+    </footer>
+      <!-- Chatbox -->
+    <div class="feedback-float">
+      <div class="chatbox" id="chatbox">
+          <div class="chatbox-header">
+              <img src="images/cat.jpg" alt="Profile" class="chatbox-avatar" />
+              <span class="notification-dot"></span>
+              <div class="chatbox-info">
+                  <h4>Oyen</h4>
+                  <p>Online</p>
+              </div>
+              <div class="close-dot" onclick="toggleChatbox()">
+                  <img src="images/close-button.png" alt="Close Chatbox" />
+              </div>
+          </div>
+          <div class="chatbox-body" id="chatbox-body">
+            <span class="chatbox-time" id="chatbox-time"></span>
+            <div class="chatbox-message">
+                <div id="typing-indicator" class="typing-indicator" style="display: none;">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div id="chatbox-content">
+                    <p id="dynamic-text"></p>
+                </div>
+            </div>
+        </div>
+        <div class="send-box">
+            <input type="text" placeholder="Enter Your Message..." id="user-input" />
+            <button id="send-button" onclick="handleSendMessage()">Send</button>
+        </div>      
+      </div>
+      <div class="feedback-icon" onclick="toggleChatbox()">
+          <img src="images/chatboxicon1.png" alt="Feedback" />
+      </div>
+    </div>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+    
+            const swiper = new Swiper('.promo-slider', {
+            loop: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+
+        // Fade-in Animation for Product Cards
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.product-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.2}s`;
+            });
+        });
+    // Data produk lainnya
+    // Data produk lainnya
+const otherProducts = [
+    { 
+        name: "Orchid Elegance", 
+        image: "products/product1.jpg", 
+        price: 100000, 
+        description: "Stunning orchids arranged in a sleek and stylish vase." 
+    },
+    { 
+        name: "Radiant Daisy", 
+        image: "products/product2.jpeg", 
+        price: 180000, 
+        description: "vibrant bouquet of cheerful daisies to brighten up any day." 
+    },
+    { 
+        name: "Lavender Peony", 
+        image: "products/product3.jpeg", 
+        price: 160000, 
+        description: "Soft lavender peonies that embody romance and tranquility." 
+    },
+    { 
+        name: "Crimson Rose", 
+        image: "products/product4.jpg", 
+        price: 120000, 
+        description: "Deep red roses wrapped in a bold black ribbon, undying love." 
+    },
+    { 
+        name: "Twilight Tulip", 
+        image: "products/product5.jpg", 
+        price: 220000, 
+        description: "A dreamy mix of purple and pastel tulips to bring the beauty." 
+    },
+    { 
+        name: "Scarlet Lily", 
+        image: "products/product6.jpg", 
+        price: 240000, 
+        description: "A sophisticated arrangement of scarlet lilies, artfully wrapped." 
+    },
+    { 
+        name: "Velvet Passion", 
+        image: "products/product7.jpg", 
+        price: 100000, 
+        description: "Deep red roses wrapped in White for a dramatic,elegant touch." 
+    },
+    { 
+        name: "Golden Meadow", 
+        image: "products/product8.jpg", 
+        price: 180000, 
+        description: "A pastel bouquet with soft blooms and a natural, rustic feel." 
+    },
+    { 
+        name: "Blush Blossom", 
+        image: "products/product9.jpg", 
+        price: 160000, 
+        description: "Light pink roses wrapped softly for a sweet, delicate look." 
+    },
+    { 
+        name: "Ruby Heart", 
+        image: "products/product10.jpg", 
+        price: 120000, 
+        description: "Cright red roses with tiny white accents, symbolizing love." 
+    },
+    { 
+        name: "Bloom Symphony", 
+        image: "products/product11.jpg", 
+        price: 220000, 
+        description: "Soft pink and blue flowers arranged for a graceful, romantic vibe." 
+    },
+    { 
+        name: "Coral Petal Basket", 
+        image: "products/product12.jpg", 
+        price: 240000, 
+        description: "A basket of peach and coral flowers, warm and cheerful." 
+    },
+    { 
+        name: "Eternal Floral Tribute", 
+        image: "products/product13.jpg", 
+        price: 2400000, 
+        description: "White blooms with greenery,for formal events or tributes." 
+    },
+    { 
+        name: "Pure White Elegance", 
+        image: "products/product14.jpg", 
+        price: 5000000, 
+        description: "White roses and lilies, symbolizing purity, peace, and simplicity." 
+    },
+    // Tambahkan deskripsi untuk produk lainnya juga...
+];
+
+// Menambahkan produk lainnya ke halaman
+const otherProductGrid = document.getElementById('other-product-grid');
+otherProducts.forEach(product => {
+    const productCard = document.createElement('div');
+    productCard.classList.add('product-card-small');
+    productCard.innerHTML = `
+        <img src="${product.image}" alt="${product.name}">
+        <h3>${product.name}</h3>
+        <p>Rp ${product.price.toLocaleString()}</p>
+        <p>${product.description}</p>
+    `;
+    otherProductGrid.appendChild(productCard);
+});
+
+      // Data Produk
+      const products = [
+            { 
+                name: "Crimson Rose",
+                price: "Rp 320.000", 
+                image: "products/product4.jpg",
+                description: "bunga mawar, statice dirangkai dengan wrapping garis emas dan pita yang elegan, Dengan Kartu ucapan, Perkiraan Dimensi Rangkaian : panjang 45 cm, lebar 30 cm, tinggi 55 cm",
+                shipping: "Bebas Pengiriman :Minimal pembelian IDR 500.000 (Jakarta dan Surabaya).Biaya pengiriman dikenakan sesuai kecamatan tujuan jika belum memenuhi minimal pembelian.",
+                notes: "Beberapa jenis bunga tidak selalu tersedia setiap musim, sehingga terkadang kami harus mengganti bunga tersebut dengan catatan bunga pengganti"
+            },
+            { 
+                name: "Twilight Tulip", 
+                price: "Rp 280.000",
+                image: "products/product5.jpg",
+                description: "Rangkaian Blooming Heater terdiri dari bunga rose, hydrangea, gompi, statice, caspea, dan eryngium dirangkai dengan wrapping Ungu dan pita Putih, perkiraan dimensi rangkaian: 40 cm x 30 cm x 45 cm",
+                shipping: "Bebas Pengiriman :Minimal pembelian IDR 500.000 (Jakarta dan Surabaya).Biaya pengiriman dikenakan sesuai kecamatan tujuan jika belum memenuhi minimal pembelian.",
+                notes: "Beberapa jenis bunga tidak selalu tersedia setiap musim, sehingga terkadang kami harus mengganti bunga tersebut dengan catatan bunga pengganti"
+            },
+            { 
+                name: "Eternal Floral Tribute", 
+                price: "Rp 2.400.000",
+                image: "products/product13.jpg",
+                description: "Rangkaian Bunga Papan A Eternal Floral Tribute. Bunga papan untuk ungkapan dukacita, Ukuran papan (diluar rangkaian bunga) : 2 m x 1,2 m, Tulisan dari bahan suyok dan styrofoam.",
+                shipping: "Bebas Pengiriman :Minimal pembelian IDR 500.000 (Jakarta dan Surabaya).Biaya pengiriman dikenakan sesuai kecamatan tujuan jika belum memenuhi minimal pembelian.",
+                notes: "Beberapa jenis bunga tidak selalu tersedia setiap musim, sehingga terkadang kami harus mengganti bunga tersebut dengan catatan bunga pengganti"
+            },
+            { 
+                name: "Pure White Elegance", 
+                price: "Rp 5.000.000",
+                image: "products/product14.jpg",
+                description: "Bunga Mawar, Chrysant, Hydrangea, Gerbera, Lily, dan Aster untuk standing flower ucapan duka cita dan belasungkawa dengan tema White Elegance, bunga mawar, aster, hydrangea, gerbera, chrysanthemum dirangkai dengan stand hitam, pita putih dan kain tile putih, disertai Kartu Ucapan Duka Cita, perkiraan dimensi rangkaian: 80cm x 50cm x 190cm",
+                shipping: "Bebas Pengiriman :Minimal pembelian IDR 500.000 (Jakarta dan Surabaya).Biaya pengiriman dikenakan sesuai kecamatan tujuan jika belum memenuhi minimal pembelian.",
+                notes: "Beberapa jenis bunga tidak selalu tersedia setiap musim, sehingga terkadang kami harus mengganti bunga tersebut dengan catatan bunga pengganti"
+            }
+        ];
+
+// Load Produk
+const productGrid = document.getElementById('product-grid');
+products.forEach((product, index) => {
+    const productCard = document.createElement('div');
+    productCard.classList.add('product-card');
+    productCard.innerHTML = `
+        <img src="${product.image}" alt="${product.name}">
+        <div class="product-overlay">
+            <h4>${product.name}</h4>
+            <p>Click to view details</p>
+        </div>
+        <h3>${product.name}</h3>
+        <p>${product.price}</p>
+    `;
+    productCard.addEventListener('click', () => openModal(index));
+    productGrid.appendChild(productCard);
+});
+
+
+        // Modal
+        const modal = document.getElementById('productModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalPrice = document.getElementById('modalPrice');
+        const descriptionContent = document.getElementById('descriptionContent');
+        const shippingContent = document.getElementById('shippingContent');
+        const notesContent = document.getElementById('notesContent');
+        const closeModalBtn = document.getElementById('closeModal');
+
+        function openModal(index) {
+            const product = products[index];
+            modalImage.src = product.image;
+            modalTitle.textContent = product.name;
+            modalPrice.textContent = product.price;
+            descriptionContent.textContent = product.description;
+            shippingContent.textContent = product.shipping;
+            notesContent.textContent = product.notes;
+
+            modal.style.display = 'flex';
+        }
+
+        closeModalBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Tab Navigasi
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                button.classList.add('active');
+                document.getElementById(button.dataset.tab).classList.add('active');
+            });
+        });
+        // ini animasi foooter
+        const canvas = document.querySelector('.animated-background');
+        const ctx = canvas.getContext('2d');
+        let width, height, particles;
+
+        function init() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = document.querySelector('footer').offsetHeight;
+            particles = [];
+            for (let i = 0; i < 100; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    size: Math.random() * 3 + 1,
+                    speedX: (Math.random() - 0.5) * 2,
+                    speedY: (Math.random() - 0.5) * 2
+                });
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => {
+                p.x += p.speedX;
+                p.y += p.speedY;
+
+                if (p.x < 0 || p.x > width) p.speedX *= -1;
+                if (p.y < 0 || p.y > height) p.speedY *= -1;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(224, 113, 8, 0.6)';
+                ctx.fill();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', init);
+        init();
+        animate();
+        function toggleChatbox() {
+          const chatbox = document.getElementById("chatbox");
+          const feedbackIcon = document.querySelector(".feedback-icon");
+        
+          if (!chatbox || !feedbackIcon) return; // Cegah error jika elemen tidak ditemukan
+        
+          if (chatbox.classList.contains("open")) {
+            chatbox.classList.remove("open");
+            setTimeout(() => {
+              chatbox.style.display = "none";
+              feedbackIcon.classList.remove("hidden"); // Tampilkan ikon feedback kembali
+            }, 300); // Sesuaikan dengan durasi animasi CSS
+            document.removeEventListener("click", handleOutsideClick);
+          } else {
+            chatbox.style.display = "flex";
+            feedbackIcon.classList.add("hidden");
+            setTimeout(() => {
+              chatbox.classList.add("open");
+            }, 10);
+        
+            function updateTime() {
+              const timeElement = document.getElementById('chatbox-time');
+              if (!timeElement) return;
+        
+              const now = new Date();
+              const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+              const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        
+              const day = days[now.getDay()];
+              const date = now.getDate();
+              const month = months[now.getMonth()];
+        
+              timeElement.textContent = `${day}, ${date} ${month}`;
+            }
+        
+            updateTime();
+        
+            // Tampilkan animasi mengetik
+            const typingIndicator = document.getElementById("typing-indicator");
+            const chatboxContent = document.getElementById("chatbox-content");
+            if (typingIndicator && chatboxContent) {
+              typingIndicator.style.display = "flex";
+              chatboxContent.style.display = "none";
+        
+              setTimeout(() => {
+                typingIndicator.style.display = "none";
+                chatboxContent.style.display = "block";
+                simulateTyping("Haloo!!! 👋 Selamat Datang Di ETHEREAL FLORIST Ada Yang Bisa Saya Bantu?");
+              }, 2000); // Durasi animasi "sedang mengetik"
+            }
+        
+            document.addEventListener("click", handleOutsideClick);
+          }
+        }
+        
+        function handleOutsideClick(event) {
+          const chatbox = document.getElementById("chatbox");
+          const feedbackIcon = document.querySelector(".feedback-icon");
+        
+          if (!chatbox.contains(event.target) && !feedbackIcon.contains(event.target)) {
+            toggleChatbox();
+          }
+        }
+        
+        function simulateTyping(text) {
+          const dynamicText = document.getElementById("dynamic-text");
+          if (!dynamicText) return;
+        
+          dynamicText.textContent = ""; // Hapus teks sebelumnya
+          let index = 0;
+        
+          const interval = setInterval(() => {
+            if (index < text.length) {
+              dynamicText.textContent += text.charAt(index);
+              index++;
+            } else {
+              clearInterval(interval);
+            }
+          }, 50);
+        }
+        document.getElementById('user-input').addEventListener('keypress', function (event) {
+            if (event.key === 'Enter') {
+                handleSendMessage(); // Panggil fungsi kirim pesan
+                event.preventDefault(); // Mencegah tindakan default (jika ada)
+            }
+        });
+          // Fungsi untuk mengirim pesan
+          function handleSendMessage() {
+            const userInput = document.getElementById("user-input");
+            const chatboxBody = document.getElementById("chatbox-body");
+        
+            if (!userInput || !chatboxBody || userInput.value.trim() === "") return;
+        
+            // Tambahkan pesan pengguna
+            const userMessage = document.createElement("div");
+            userMessage.className = "user-message";
+            userMessage.textContent = userInput.value;
+            chatboxBody.appendChild(userMessage);
+        
+            userInput.value = "";
+        
+            // Panggil fungsi untuk menggulir ke bawah
+            scrollToBottom();
+        
+            // Tambahkan balasan sistem
+            showSystemResponse("Hubungi Kami Kapan Saja");
+        }
+        
+        function showSystemResponse(responseText) {
+            const chatboxBody = document.getElementById("chatbox-body");
+            if (!chatboxBody) return;
+        
+            // Bungkus typing-indicator dalam elemen chatbox-message
+            const chatboxMessage = document.createElement("div");
+            chatboxMessage.className = "chatbox-message";
+        
+            const typingIndicator = document.createElement("div");
+            typingIndicator.className = "typing-indicator";
+            typingIndicator.innerHTML = `<span></span><span></span><span></span>`;
+            chatboxMessage.appendChild(typingIndicator);
+        
+            chatboxBody.appendChild(chatboxMessage);
+            scrollToBottom();
+        
+            setTimeout(() => {
+                chatboxBody.removeChild(chatboxMessage);
+        
+                // Bungkus pesan sistem dalam elemen chatbox-message
+                const systemMessageWrapper = document.createElement("div");
+                systemMessageWrapper.className = "chatbox-message";
+        
+                // Tambahkan pesan sistem
+                systemMessageWrapper.innerHTML = `
+                    <p>${responseText}</p>
+                    <p>
+                        Silahkan Klik <a href="https://wa.me/628123456789" target="_blank" style="color: white; text-decoration: underline;">
+                        Di Sini. <img src="images/iconwhatsapp.png" alt="Icon" style="width: 14px; height: 16px; margin-left: 2px; vertical-align: middle;"></a>
+                    </p>
+                `;
+        
+                chatboxBody.appendChild(systemMessageWrapper);
+                scrollToBottom();
+            }, 2000);
+        }
+        
+        
+        function scrollToBottom() {
+            const chatboxBody = document.getElementById("chatbox-body");
+            if (chatboxBody) {
+                chatboxBody.scrollTop = chatboxBody.scrollHeight; // Gulir ke bagian bawah
+            }
+        }
+        // Panggil `scrollToBottom` setelah menambahkan elemen
+        chatboxBody.appendChild(chatboxMessage);
+        scrollToBottom();
+        
+        
+          // Tambahkan event listener untuk tombol kirim
+          document.getElementById("send-button")?.addEventListener("click", handleSendMessage);
+</script>
+</body>
+</html>

@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+.feedback-icon {
+  width: 60px;
+  height: 60px;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  background-color: #fc7e00;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  transition: transform 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
+}
+
+.feedback-icon.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.feedback-icon:hover {
+  transform: scale(1.1);
+  background-color: #ff5106;
+}
+
+.feedback-icon img {
+  width: 30px;
+  height: 30px;
+}
+
+.notification-dot {
+  width: 12px;
+  height: 12px;
+  background-color: rgb(8, 180, 2);
+  border-radius: 50%;
+  position: absolute;
+  top: 35px;
+  right: 270px;
+}
+
+.chatbox {
+  width: 60px;
+  height: 60px;
+  background-color: #f0f0f0;
+  border-radius: 50%;
+  overflow: hidden;
+  position: fixed;
+  bottom: 30px;
+  right: 20px;
+  display: none;
+  flex-direction: column;
+  transform: scale(0);
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.chatbox.open {
+  display: flex;
+  transform: scale(1);
+  opacity: 1;
+  animation: morph 0.5s ease forwards;
+}
+
+@keyframes morph {
+  0% {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+  }
+  100% {
+    width: 320px;
+    height: auto;
+    border-radius: 10px;
+  }
+}
+
+.chatbox-header {
+  background-color: #ff7b00;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.chatbox-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.chatbox-info h4 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.chatbox-info p {
+  margin: 0;
+  font-size: 12px;
+  color: #28a745;
+}
+
+.chatbox-close {
+  margin-left: auto;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.chatbox-body {
+  padding: 10px;
+  background-image: url('images/boxchat.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  max-height: 300px;
+}
+
+.chatbox-time {
+  bottom: -18px;
+  right: 10px;
+  font-size: 15px;
+  color: #000000;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  justify-content: center;
+  display: flex;
+}
+
+.chatbox-message {
+  background-color: #ff8f27; /* Warna latar untuk teks */
+  border-radius: 15px;
+  padding: 8px;
+  margin-bottom: 10px;
+  width: 170px;
+  max-width: 90%; /* Atur batas lebar */
+  height: auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  font-size: 14px;
+  line-height: 1.4; /* Tambahkan jarak antar baris */
+  word-wrap: break-word; /* Memaksa kata untuk terputus jika terlalu panjang */
+  white-space: normal; /* Izinkan teks untuk melanjutkan ke baris berikutnya */
+  display: flex;
+  flex-direction: column;
+}
+
+.chatbox-message p {
+  margin: 0;
+}
+
+.send-box {
+  display: flex;
+  align-items: center;
+  border: 2px solid #ff8f27;
+  padding: 2px 2px;
+  background-color: #ff8f27;
+  width: auto;
+  height: 40px;
+}
+
+.send-box input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  margin-left: 10px;
+  color: #000000;
+  flex-grow: 1;
+  padding: 1px 1px;
+}
+
+.send-box button {
+  border: none;
+  outline: none;
+  background-color: #0c0c0c;
+  color: #ff8f27;
+  font-size: 17px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.send-box button:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+.close-dot{
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  position: absolute;
+  top: 8px;
+  right: 25px;
+}
+.close-dot img{
+  height: auto;
+  width: 28px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.close-dot :hover{
+  transform: scale(1.2); /* Perbesar ikon saat hover */
+  cursor: pointer;
+}
+.typing-indicator {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 40px;
+  margin: 5px 0;
+}
+
+.typing-indicator span {
+  display: block;
+  width: 8px;
+  height: 8px;
+  margin-right: 4px;
+  background-color: #000000;
+  border-radius: 50%;
+  animation: bounce 1.2s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+#dynamic-text {
+  font-size: 14px;
+  color: #000000;
+  white-space: normal; /* Ubah dari nowrap ke normal */
+  word-wrap: break-word;
+  overflow: hidden;
+  display: inline-block;
+  animation: blink-cursor 0.7s step-end infinite;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+@keyframes blink-cursor {
+  from {
+    border-color: transparent;
+  }
+  to {
+    border-color: #333;
+  }
+}
+        .user-message {
+            background-color: #000000;
+            border-radius: 15px;
+            padding: 8px;
+            padding-left: 15px;
+            color: #ff8f27;
+            width: 120px;
+            max-width: 90%;
+            margin: 10px 0;
+            font-size: 14px;
+            align-self: flex-end;
+            word-wrap: break-word;
+            margin-bottom: 15px;
+        }
+        
+    </style>
+</head>
+<body>
+  <div class="feedback-float">
+    <!-- Chatbox -->
+    <div class="chatbox" id="chatbox">
+        <!-- Header -->
+        <div class="chatbox-header">
+            <img src="images/cat.jpg" alt="Profile" class="chatbox-avatar" />
+            <span class="notification-dot"></span>
+            <div class="chatbox-info">
+                <h4>Oyen</h4>
+                <p>Online</p>
+            </div>
+            <div class="close-dot" onclick="toggleChatbox()">
+                <img src="images/close-button.png" alt="Close Chatbox" />
+            </div>
+        </div>
+
+        <!-- Body -->
+        <div class="chatbox-body" id="chatbox-body">
+          <span class="chatbox-time" id="chatbox-time"></span>
+          <div class="chatbox-message">
+              <!-- Animasi mengetik -->
+              <div id="typing-indicator" class="typing-indicator" style="display: none;">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+              </div>
+              <!-- Pesan dinamis -->
+              <div id="chatbox-content">
+                  <p id="dynamic-text"></p>
+              </div>
+          </div>
+      </div>
+      <div class="send-box">
+          <input type="text" placeholder="Enter Your Message..." id="user-input" />
+          <button id="send-button" onclick="handleSendMessage()">Send</button>
+      </div>      
+    </div>
+
+    <!-- Feedback Icon -->
+    <div class="feedback-icon" onclick="toggleChatbox()">
+        <img src="images/chatboxicon1.png" alt="Feedback" />
+    </div>
+</div>
+
+<script>
+ function toggleChatbox() {
+  const chatbox = document.getElementById("chatbox");
+  const feedbackIcon = document.querySelector(".feedback-icon");
+
+  if (!chatbox || !feedbackIcon) return; // Cegah error jika elemen tidak ditemukan
+
+  if (chatbox.classList.contains("open")) {
+    chatbox.classList.remove("open");
+    setTimeout(() => {
+      chatbox.style.display = "none";
+      feedbackIcon.classList.remove("hidden"); // Tampilkan ikon feedback kembali
+    }, 300); // Sesuaikan dengan durasi animasi CSS
+    document.removeEventListener("click", handleOutsideClick);
+  } else {
+    chatbox.style.display = "flex";
+    feedbackIcon.classList.add("hidden");
+    setTimeout(() => {
+      chatbox.classList.add("open");
+    }, 10);
+
+    function updateTime() {
+      const timeElement = document.getElementById('chatbox-time');
+      if (!timeElement) return;
+
+      const now = new Date();
+      const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+      const day = days[now.getDay()];
+      const date = now.getDate();
+      const month = months[now.getMonth()];
+
+      timeElement.textContent = `${day}, ${date} ${month}`;
+    }
+
+    updateTime();
+
+    // Tampilkan animasi mengetik
+    const typingIndicator = document.getElementById("typing-indicator");
+    const chatboxContent = document.getElementById("chatbox-content");
+    if (typingIndicator && chatboxContent) {
+      typingIndicator.style.display = "flex";
+      chatboxContent.style.display = "none";
+
+      setTimeout(() => {
+        typingIndicator.style.display = "none";
+        chatboxContent.style.display = "block";
+        simulateTyping("Haloo!!! 👋 Selamat Datang Di ETHEREAL FLORIST Ada Yang Bisa Saya Bantu?");
+      }, 2000); // Durasi animasi "sedang mengetik"
+    }
+
+    document.addEventListener("click", handleOutsideClick);
+  }
+}
+
+function handleOutsideClick(event) {
+  const chatbox = document.getElementById("chatbox");
+  const feedbackIcon = document.querySelector(".feedback-icon");
+
+  if (!chatbox.contains(event.target) && !feedbackIcon.contains(event.target)) {
+    toggleChatbox();
+  }
+}
+
+function simulateTyping(text) {
+  const dynamicText = document.getElementById("dynamic-text");
+  if (!dynamicText) return;
+
+  dynamicText.textContent = ""; // Hapus teks sebelumnya
+  let index = 0;
+
+  const interval = setInterval(() => {
+    if (index < text.length) {
+      dynamicText.textContent += text.charAt(index);
+      index++;
+    } else {
+      clearInterval(interval);
+    }
+  }, 50);
+}
+document.getElementById('user-input').addEventListener('keypress', function (event) {
+    if (event.key === 'Enter') {
+        handleSendMessage(); // Panggil fungsi kirim pesan
+        event.preventDefault(); // Mencegah tindakan default (jika ada)
+    }
+});
+  // Fungsi untuk mengirim pesan
+  function handleSendMessage() {
+    const userInput = document.getElementById("user-input");
+    const chatboxBody = document.getElementById("chatbox-body");
+
+    if (!userInput || !chatboxBody || userInput.value.trim() === "") return;
+
+    // Tambahkan pesan pengguna
+    const userMessage = document.createElement("div");
+    userMessage.className = "user-message";
+    userMessage.textContent = userInput.value;
+    chatboxBody.appendChild(userMessage);
+
+    userInput.value = "";
+
+    // Panggil fungsi untuk menggulir ke bawah
+    scrollToBottom();
+
+    // Tambahkan balasan sistem
+    showSystemResponse("Hubungi Kami Untuk Lebih Lanjut");
+}
+
+function showSystemResponse(responseText) {
+    const chatboxBody = document.getElementById("chatbox-body");
+    if (!chatboxBody) return;
+
+    // Bungkus typing-indicator dalam elemen chatbox-message
+    const chatboxMessage = document.createElement("div");
+    chatboxMessage.className = "chatbox-message";
+
+    const typingIndicator = document.createElement("div");
+    typingIndicator.className = "typing-indicator";
+    typingIndicator.innerHTML = `<span></span><span></span><span></span>`;
+    chatboxMessage.appendChild(typingIndicator);
+
+    chatboxBody.appendChild(chatboxMessage);
+    scrollToBottom();
+
+    setTimeout(() => {
+        chatboxBody.removeChild(chatboxMessage);
+
+        // Bungkus pesan sistem dalam elemen chatbox-message
+        const systemMessageWrapper = document.createElement("div");
+        systemMessageWrapper.className = "chatbox-message";
+
+        // Tambahkan pesan sistem
+        systemMessageWrapper.innerHTML = `
+            <p>${responseText}</p>
+            <p>
+                Silahkan Klik <a href="https://wa.me/628123456789" target="_blank" style="color: white; text-decoration: underline;">
+                Di Sini. <img src="images/iconwhatsapp.png" alt="Icon" style="width: 14px; height: 16px; margin-left: 2px; vertical-align: middle;"></a>
+            </p>
+        `;
+
+        chatboxBody.appendChild(systemMessageWrapper);
+        scrollToBottom();
+    }, 2000);
+}
+
+
+function scrollToBottom() {
+    const chatboxBody = document.getElementById("chatbox-body");
+    if (chatboxBody) {
+        chatboxBody.scrollTop = chatboxBody.scrollHeight; // Gulir ke bagian bawah
+    }
+}
+// Panggil `scrollToBottom` setelah menambahkan elemen
+chatboxBody.appendChild(chatboxMessage);
+scrollToBottom();
+
+
+  // Tambahkan event listener untuk tombol kirim
+  document.getElementById("send-button")?.addEventListener("click", handleSendMessage);
+</script>
+
+</body>
+
+</html>

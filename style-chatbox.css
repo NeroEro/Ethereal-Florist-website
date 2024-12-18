@@ -1,0 +1,327 @@
+.feedback-icon {
+    width: 60px;
+    height: 60px;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    background-color: #fc7e00;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    transition: transform 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
+    animation: bounceIn 0.8s ease, pulse 2.5s infinite; /* Bounce-in saat muncul & denyutan */
+  }
+  
+  .feedback-icon.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  
+  .feedback-icon:hover {
+    transform: scale(1.3) rotate(15deg); /* Zoom lebih besar dan sedikit rotasi */
+    background-color: #ff5106;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); /* Shadow lebih intens */
+  }
+  
+  .feedback-icon img {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.3s ease; /* Ikon ikut bereaksi */
+  }
+  
+  .feedback-icon:hover img {
+    transform: scale(1.1); /* Ikon juga membesar */
+  }
+  
+  /* Animasi denyutan (pulse) */
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    50% {
+      transform: scale(1.1);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+    100% {
+      transform: scale(1);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+  }
+  
+  /* Animasi bounce-in (melompat saat muncul) */
+  @keyframes bounceIn {
+    0% {
+      transform: scale(0.5) translateY(100%);
+      opacity: 0;
+    }
+    60% {
+      transform: scale(1.1) translateY(-10%);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  
+  .notification-dot {
+    width: 12px;
+    height: 12px;
+    background-color: rgb(8, 180, 2);
+    border-radius: 50%;
+    position: absolute;
+    top: 35px;
+    right: 270px;
+  }
+  
+  .chatbox {
+    width: 60px;
+    height: 60px;
+    background-color: #f0f0f0;
+    border-radius: 50%;
+    overflow: hidden;
+    position: fixed;
+    bottom: 30px;
+    right: 20px;
+    display: none;
+    flex-direction: column;
+    transform: scale(0);
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    z-index: 2;
+  }
+  
+  .chatbox.open {
+    display: flex;
+    transform: scale(1);
+    opacity: 1;
+    animation: morph 0.5s ease forwards;
+  }
+  
+  @keyframes morph {
+    0% {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+    }
+    100% {
+      width: 320px;
+      height: auto;
+      border-radius: 10px;
+    }
+  }
+  
+  .chatbox-header {
+    background-color: #ff7b00;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #e6e6e6;
+  }
+  
+  .chatbox-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .chatbox-info h4 {
+    margin: 0;
+    font-size: 16px;
+  }
+  
+  .chatbox-info p {
+    margin: 0;
+    font-size: 12px;
+    color: #28a745;
+  }
+  
+  .chatbox-close {
+    margin-left: auto;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  
+  .chatbox-body {
+    padding: 10px;
+    background-image: url('images/boxchat.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    max-height: 300px;
+  }
+  
+  .chatbox-time {
+    bottom: -18px;
+    right: 10px;
+    font-size: 15px;
+    color: #000000;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    justify-content: center;
+    display: flex;
+  }
+  
+  .chatbox-message {
+    background-color: #ff8f27; /* Warna latar untuk teks */
+    border-radius: 15px;
+    padding: 8px;
+    margin-bottom: 10px;
+    width: 170px;
+    max-width: 90%; /* Atur batas lebar */
+    height: auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    font-size: 14px;
+    line-height: 1.4; /* Tambahkan jarak antar baris */
+    word-wrap: break-word; /* Memaksa kata untuk terputus jika terlalu panjang */
+    white-space: normal; /* Izinkan teks untuk melanjutkan ke baris berikutnya */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .chatbox-message p {
+    margin: 0;
+  }
+  
+  .send-box {
+    display: flex;
+    align-items: center;
+    border: 2px solid #ff8f27;
+    padding: 2px 2px;
+    background-color: #ff8f27;
+    width: auto;
+    height: 40px;
+  }
+  
+  .send-box input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 14px;
+    margin-left: 10px;
+    color: #000000;
+    flex-grow: 1;
+    padding: 1px 1px;
+  }
+  .send-box ::placeholder{
+    font-size: 13px;
+    color: #4c4949;
+  }
+  
+  .send-box button {
+    border: none;
+    outline: none;
+    background-color: #0c0c0c;
+    color: #ff8f27;
+    font-size: 17px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .send-box button:hover {
+    background-color: #ffffff;
+    color: #000000;
+  }
+  .close-dot{
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    position: absolute;
+    top: 8px;
+    right: 25px;
+  }
+  .close-dot img{
+    height: auto;
+    width: 28px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .close-dot :hover{
+    transform: scale(1.2); /* Perbesar ikon saat hover */
+    cursor: pointer;
+  }
+  .typing-indicator {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 40px;
+    margin: 5px 0;
+  }
+  
+  .typing-indicator span {
+    display: block;
+    width: 8px;
+    height: 8px;
+    margin-right: 4px;
+    background-color: #000000;
+    border-radius: 50%;
+    animation: bounce 1.2s infinite ease-in-out;
+  }
+  
+  .typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  
+  .typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+  
+  #dynamic-text {
+    font-size: 14px;
+    color: #000000;
+    white-space: normal; /* Ubah dari nowrap ke normal */
+    word-wrap: break-word;
+    overflow: hidden;
+    display: inline-block;
+    animation: blink-cursor 0.7s step-end infinite;
+  }
+  
+  @keyframes bounce {
+    0%, 80%, 100% {
+      transform: scale(0);
+    }
+    40% {
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes blink-cursor {
+    from {
+      border-color: transparent;
+    }
+    to {
+      border-color: #333;
+    }
+  }
+.user-message {
+    background-color: #000000;
+    border-radius: 15px;
+    padding: 8px;
+    padding-left: 15px;
+    color: #ff8f27;
+    width: 120px;
+    max-width: 90%;
+    margin: 10px 0;
+    font-size: 14px;
+    align-self: flex-end;
+    word-wrap: break-word;
+    margin-bottom: 15px;
+          }
+
+/* Java Script */
